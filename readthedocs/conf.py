@@ -18,7 +18,7 @@ OUTPUT_DIRECTORY = _build/html/{pkg}
 TAGFILES = {tagfiles}
 GENERATE_TAGFILE = _build/html/{pkg}.tag
 HTML_OUTPUT = .
-'''.format(pkg=pkg, tagfiles=' '.join(['_build/html/{p}.tag=../{p}' for p in prevpkgs])))
+'''.format(pkg=pkg, tagfiles=' '.join(['_build/html/{p}.tag=../{p}'.format(p=p) for p in prevpkgs])))
    fp.close()
 
    print('file contents ...')

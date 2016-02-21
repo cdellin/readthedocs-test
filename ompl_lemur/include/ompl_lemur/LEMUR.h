@@ -7,6 +7,8 @@
 namespace ompl_lemur
 {
 
+/*! \brief This uses pr_bgl::lazysp and pr_bgl::incbi !
+ */
 // for now, this does HARD BATCHING with SUBGRAPH COSTS
 // the core roadmap states are owned by the core roadmap
 // the overlay roots and edges own their states (except anchors)
