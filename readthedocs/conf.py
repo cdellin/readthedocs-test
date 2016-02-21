@@ -18,6 +18,10 @@ HTML_OUTPUT = .
 '''.format(pkg=pkg))
    fp.close()
 
+   print('file contents ...')
+   subprocess.check_call(['cat',filename])
+
+   print('calling doxygen {} ...'.format(filename))
    subprocess.check_call(['doxygen',filename])
 
 #exit()
