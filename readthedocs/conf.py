@@ -6,7 +6,7 @@ for pkg in ['pr_bgl','ompl_lemur']:
    
    # generate doxygen output into subfolder
    fd,filename = tempfile.mkstemp(text=True)
-   fp = os.fdopen(fd)
+   fp = os.fdopen(fd,'w')
    fp.write('''
 PROJECT_NAME = "{pkg}"
 INPUT = ../{pkg}
