@@ -1,5 +1,5 @@
-PROJECT_NAME = "mypkg"
-INPUT = ../mypkg
+PROJECT_NAME = "pr_bgl"
+INPUT = ../pr_bgl
 RECURSIVE = YES
 GENERATE_HTML = YES
 GENERATE_LATEX = NO
