@@ -13,8 +13,8 @@ INPUT = ../{pkg}
 RECURSIVE = YES
 GENERATE_HTML = YES
 GENERATE_LATEX = NO
-OUTPUT_DIRECTORY = _build/{pkg}
-HTML_OUTPUT = html
+OUTPUT_DIRECTORY = _build/html/{pkg}
+HTML_OUTPUT = .
 '''.format(pkg=pkg))
    fp.close()
 
