@@ -14,7 +14,7 @@ RECURSIVE = YES
 GENERATE_HTML = YES
 GENERATE_LATEX = NO
 OUTPUT_DIRECTORY = _build/{pkg}
-HTML_OUTPUT = .
+HTML_OUTPUT = html
 '''.format(pkg=pkg))
    fp.close()
 
