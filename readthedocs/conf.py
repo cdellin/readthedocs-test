@@ -3,7 +3,7 @@ import subprocess
 import tempfile
 
 # in dependency order
-pkgs = ['pr_bgl','ompl_lemur']
+pkgs = ['pr_bgl','ompl_lemur','or_lemur','prpy_lemur']
 for ipkg,pkg in enumerate(pkgs):
    
    tagfiles=' '.join(['_build/html/{p}.tag=../{p}'.format(p=p) for p in pkgs[:ipkg]])
@@ -19,6 +19,7 @@ for ipkg,pkg in enumerate(pkgs):
    fp.write('''
 PROJECT_NAME = "{pkg}"
 INPUT = ../{pkg}
+EXCLUDE = ../{pkg}/README.md
 RECURSIVE = YES
 GENERATE_LATEX = NO
 GENERATE_HTML = YES
@@ -38,6 +39,14 @@ GENERATE_TAGFILE = _build/html/{pkg}.tag
    # add css
    fp = open(fn_style,'a')
    fp.write('''
+.mytitlearea {
+background-color:#000000;
+color:white;
+font-size:14px;
+}
+.mytitlelabel {
+padding-left:5px;
+}
 .mybtn {
 display:inline-block;
 background-color:#333333;
@@ -46,6 +55,10 @@ padding: 3px 15px;
 text-align: center;	
 text-decoration: none;
 margin-left:5px;
+}
+.mybtn:hover {
+color:white;
+background-color:#5555CC;
 }
 .mybtn-current {
 display:inline-block;
@@ -56,11 +69,7 @@ text-align: center;
 text-decoration: none;
 margin-left:5px;
 }
-.mybtn:hover {
-color:white;
-background-color:#5555CC;
-opacity:1;
-}''')
+''')
    fp.close()
    
    # modify header
@@ -69,7 +78,7 @@ opacity:1;
    _,b = headerhtml.split('<!--END TITLEAREA-->')
    fp = open(fn_header,'w')
    fp.write(a)
-   fp.write('''<div id="titlearea" style="background-color:#000000;padding-left:5px;color:white;font-size:14px;">LEMUR Packages:\n''')
+   fp.write('''<div id="titlearea" class="mytitlearea"><span class="mytitlelabel">LEMUR Packages:</span>\n''')
    for otherpkg in sorted(pkgs):
       if otherpkg == pkg:
          fp.write('<a href="../{}/index.html" class="mybtn-current">{}</a>\n'.format(otherpkg,otherpkg))
@@ -90,17 +99,19 @@ opacity:1;
 
 # throw in an html redirect to ompl_lemur
 fp = open('_build/html/index.html','w')
-fp.write('''
+fp.write('''<!DOCTYPE html>
 <html>
 <head>
+<title>LEMUR Documentation</title>
 <meta http-equiv="refresh" content="0; url=ompl_lemur/index.html" />
 </head>
 <body>
+<a href="ompl_lemur/index.html">Click here</a> to be forwarded.
 </body>
 </html>
 ''')
 fp.close()
 
-# dump bogus contents.rst file
+# dump bogus contents.rst file fo sphinx
 fp = open('contents.rst','w')
 fp.close()
