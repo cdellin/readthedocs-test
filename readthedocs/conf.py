@@ -102,5 +102,5 @@ fp.write('''
 fp.close()
 
 # dump bogus contents.rst file
-fp = open('_build/html/contents.rst','w')
+fp = open('contents.rst','w')
 fp.close()
