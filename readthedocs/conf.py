@@ -1,20 +1,20 @@
 import os
 import subprocess
-import tempfile
 
 # in dependency order
 pkgs = ['pr_bgl','ompl_lemur','or_lemur','prpy_lemur']
 for ipkg,pkg in enumerate(pkgs):
    
+   # previous tagfiles
    tagfiles=' '.join(['_build/html/{p}.tag=../{p}'.format(p=p) for p in pkgs[:ipkg]])
    
-   # temp folder
-   fn_tmpdir = tempfile.mkdtemp()
-   fn_config = '{}/config.txt'.format(fn_tmpdir)
+   # doxygen files
+   fn_config = 'config.txt'
    fn_header = 'header.html'
    fn_footer = 'footer.html'
    fn_style = 'style.css'
    
+   # doxygen config file
    fp = open(fn_config,'w')
    fp.write('''
 PROJECT_NAME = "{pkg}"
@@ -36,7 +36,7 @@ GENERATE_TAGFILE = _build/html/{pkg}.tag
    # generate doxygen html headers/footers
    subprocess.check_call(['doxygen','-w','html',fn_header,fn_footer,fn_style,fn_config])
    
-   # add css
+   # add custom css for top bar
    fp = open(fn_style,'a')
    fp.write('''
 .mytitlearea {
@@ -72,7 +72,7 @@ margin-left:5px;
 ''')
    fp.close()
    
-   # modify header
+   # modify header html to add custom top bar
    headerhtml = open(fn_header).read()
    a,_ = headerhtml.split('<!--BEGIN TITLEAREA-->')
    _,b = headerhtml.split('<!--END TITLEAREA-->')
@@ -95,9 +95,8 @@ margin-left:5px;
    os.remove(fn_header)
    os.remove(fn_footer)
    os.remove(fn_style)
-   os.rmdir(fn_tmpdir)
 
-# throw in an html redirect to ompl_lemur
+# throw in a toplevel html redirect to ompl_lemur
 fp = open('_build/html/index.html','w')
 fp.write('''<!DOCTYPE html>
 <html>
