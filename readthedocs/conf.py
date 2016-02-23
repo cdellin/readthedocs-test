@@ -6,7 +6,7 @@ tagfiles = {}
 # attempt to retrieve ompl tagfile
 try:
    tagfile = '_build/ompl.tag'
-   subprocess.check_call(['wget','-O',tagfile,'http://ompl.kavrakilab.org/core/ompl.tag'])
+   subprocess.check_call(['curl','--output',tagfile,'http://ompl.kavrakilab.org/core/ompl.tag'])
    tagfiles = {tagfile:'http://ompl.kavrakilab.org/'}
 except subprocess.CalledProcessError as ex:
    print('got error {} when trying to connect to ompl website for tag file, ignoring ...'.format(ex))
